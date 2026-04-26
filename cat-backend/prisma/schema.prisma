@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  nombre   String
+  email    String   @unique
+  password String
+  rol      Rol      @default(CONSULTOR)
+  activo   Boolean  @default(true)
+  creadoEn DateTime @default(now())
+}
+
+enum Rol {
+  ADMINISTRADOR
+  CONSULTOR
+}
+
+model Categoria {
+  id            Int      @id @default(autoincrement())
+  nombre        String   @unique
+  descripcion   String?
+  icono         String?
+  color         String?
+  codigoInterno String?
+  estado        Boolean  @default(true)
+  activos       Activo[]
+  creadoEn      DateTime @default(now())
+}
+
+model Activo {
+  id             Int             @id @default(autoincrement())
+  codigo         String          @unique
+  nombre         String
+  marcaModelo    String?
+  numeroSerie    String?
+  fechaCompra    DateTime?
+  valor          Float?
+  estado         EstadoActivo    @default(SIN_ASIGNAR)
+  categoriaId    Int
+  categoria      Categoria       @relation(fields: [categoriaId], references: [id])
+  asignaciones   Asignacion[]
+  mantenimientos Mantenimiento[]
+  creadoEn       DateTime        @default(now())
+}
+
+enum EstadoActivo {
+  ACTIVO
+  EN_MANTENIMIENTO
+  SIN_ASIGNAR
+  DADO_DE_BAJA
+}
+
+model Asignacion {
+  id              Int       @id @default(autoincrement())
+  activoId        Int
+  activo          Activo    @relation(fields: [activoId], references: [id])
+  nombrePersona   String
+  area            String?
+  fechaAsignacion DateTime
+  fechaDevolucion DateTime?
+  activa          Boolean   @default(true)
+  creadoEn        DateTime  @default(now())
+}
+
+model Mantenimiento {
+  id            Int               @id @default(autoincrement())
+  activoId      Int
+  activo        Activo            @relation(fields: [activoId], references: [id])
+  tipo          TipoMantenimiento
+  descripcion   String
+  tecnico       String
+  costoEstimado Float?
+  fechaInicio   DateTime
+  fechaCierre   DateTime?
+  observaciones String?
+  estado        EstadoMant        @default(EN_PROCESO)
+  creadoEn      DateTime          @default(now())
+}
+
+enum TipoMantenimiento {
+  PREVENTIVO
+  CORRECTIVO
+}
+
+enum EstadoMant {
+  EN_PROCESO
+  FINALIZADO
+}
