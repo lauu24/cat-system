@@ -1,12 +1,14 @@
 .sidebar {
   width: 260px;
-  min-height: 100vh;
+  height: 100vh;
   background: #f0eef8;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #e0d9f5;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  overflow-y: auto;
 }
 
 .sidebar-header {

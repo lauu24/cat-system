@@ -1,0 +1,223 @@
+.solicitudes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.solicitudes-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e0d9f5;
+  padding-bottom: 0;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+
+.tab-btn:hover {
+  color: #3D2A8A;
+}
+
+.tab-btn.active {
+  color: #3D2A8A;
+  border-bottom-color: #3D2A8A;
+  font-weight: 600;
+}
+
+.solicitudes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.solicitud-card {
+  background: #fff;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.solicitud-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.solicitud-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.solicitud-tipo {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.solicitud-usuario {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.solicitud-area {
+  font-size: 12px;
+  color: #888;
+}
+
+.solicitud-fecha {
+  font-size: 12px;
+  color: #888;
+}
+
+.badge-pendiente {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge-aprobado {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.badge-rechazado {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+
+.solicitud-datos {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.solicitud-dato-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.solicitud-dato-label {
+  font-size: 11px;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.solicitud-dato-valor {
+  font-size: 13px;
+  color: #1a1a2e;
+}
+
+.solicitud-comentario {
+  background: #fce4ec;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #c62828;
+  margin-bottom: 12px;
+}
+
+
+.solicitud-acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-aprobar {
+  padding: 8px 20px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-aprobar:hover {
+  background: #1b5e20;
+}
+
+.btn-rechazar {
+  padding: 8px 20px;
+  background: #fff;
+  color: #c62828;
+  border: 1px solid #c62828;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-rechazar:hover {
+  background: #fce4ec;
+}
+
+.solicitud-form-tipo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.solicitud-tipo-btn {
+  border: 2px solid #e0d9f5;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  background: #fff;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+
+.solicitud-tipo-btn:hover {
+  border-color: #3D2A8A;
+  background: #f9f8ff;
+}
+
+.solicitud-tipo-btn.selected {
+  border-color: #3D2A8A;
+  background: #ede9ff;
+}
+
+.solicitud-tipo-btn-nombre {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-top: 6px;
+}
+
+.empty-solicitudes {
+  text-align: center;
+  padding: 48px 20px;
+  color: #888;
+  font-size: 14px;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+}

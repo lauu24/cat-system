@@ -1,0 +1,118 @@
+.usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.usuarios-resumen {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.usuarios-resumen-card {
+  background: #f4f4f4;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.usuarios-resumen-icono {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.usuarios-resumen-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.usuarios-resumen-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.usuarios-resumen-sublabel {
+  font-size: 12px;
+  color: #888;
+}
+
+.usuarios-resumen-count {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-top: 4px;
+}
+
+.usuario-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #3D2A8A;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.usuario-nombre-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario-tu {
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+}
+
+.badge-admin {
+  background: #ede9ff;
+  color: #3D2A8A;
+}
+
+.badge-consultor {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.badge-activo-usuario {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.badge-inactivo-usuario {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+.login-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.login-eye-icon {
+  width: 20px;
+  height: 20px;
+}

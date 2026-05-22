@@ -77,6 +77,18 @@ export default function Login() {
                 />
               </button>
             </div>
+
+            <div className="login-credenciales">
+              <p className="login-credenciales-titulo">Cuentas de prueba</p>
+              <div className="login-credenciales-item">
+                <span>Administrador</span>
+                <span>admin@gmail.com / admin123</span>
+              </div>
+              <div className="login-credenciales-item">
+                <span>Consultor</span>
+                <span>consultor1@gmail.com / consultor123</span>
+              </div>
+            </div>
           </div>
 
           {error && <p className="login-error">{error}</p>}

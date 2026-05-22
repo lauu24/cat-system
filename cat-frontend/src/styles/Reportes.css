@@ -1,0 +1,127 @@
+.reportes-tipos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.reporte-tipo-card {
+  border: 2px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  background: #fff;
+  text-align: left;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+
+.reporte-tipo-card:hover {
+  border-color: #3D2A8A;
+  background: #f9f8ff;
+}
+
+.reporte-tipo-card.selected {
+  border-color: #3D2A8A;
+  background: #ede9ff;
+}
+
+.reporte-tipo-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.reporte-tipo-nombre {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.reporte-tipo-desc {
+  font-size: 12px;
+  color: #888;
+}
+
+.reportes-filtros {
+  background: #f9f9f9;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.reportes-filtros-titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 14px;
+}
+
+.reportes-filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.reportes-filtros-grid select,
+.reportes-filtros-grid input {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-exportar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-exportar:hover {
+  background: #1b5e20;
+}
+
+.btn-exportar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reportes-preview {
+  margin-top: 24px;
+}
+
+.reportes-preview-titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.reportes-empty {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 14px;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+}

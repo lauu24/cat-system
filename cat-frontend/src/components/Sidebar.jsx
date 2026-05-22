@@ -17,6 +17,7 @@ import usuariosInactivo from '../assets/usuarios-inactivo.svg'
 import reportesActivo from '../assets/reportes-activo.svg'
 import reportesInactivo from '../assets/reportes-inactivo.svg'
 import profile from '../assets/profile.svg'
+import { IconMessageQuestion } from '@tabler/icons-react';
 
 const navItems = [
   { to: '/', label: 'Dashboard', activo: dashboardActivo, inactivo: dashboardInactivo, end: true },
@@ -66,6 +67,20 @@ export default function Sidebar() {
       <nav className="sidebar-nav">
         {navItems.map(renderItem)}
         {esAdmin && adminItems.map(renderItem)}
+        <NavLink
+          to="/solicitudes"
+          className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+        >
+          {({ isActive }) => (
+            <>
+              <IconMessageQuestion
+                size={20}
+                color={isActive ? '#34246E' : '#555'}
+              />
+              Solicitudes
+            </>
+          )}
+        </NavLink>
         {reportesItem.map(renderItem)}
       </nav>
 

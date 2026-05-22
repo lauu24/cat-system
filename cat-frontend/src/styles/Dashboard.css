@@ -1,0 +1,128 @@
+.dashboard-indicadores {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.indicador-card {
+  background: #f4f4f4;
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.indicador-icono-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicador-label {
+  font-size: 12px;
+  color: #888;
+}
+
+.indicador-valor {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+
+.dashboard-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+}
+
+.dashboard-empty img {
+  width: 260px;
+  height: auto;
+}
+
+.dashboard-empty-texto {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.dashboard-grafica {
+  margin-bottom: 24px;
+}
+
+.dashboard-grafica-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+}
+
+.dashboard-valor {
+  border: 1px solid #e0d9f5;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  background: #f4f4f4;
+}
+
+.dashboard-valor-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+.dashboard-valor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.dashboard-valor-item label {
+  font-size: 12px;
+  color: #888;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dashboard-valor-item span {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.grafica-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #555;
+}
+
+.leyenda-circulo {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}

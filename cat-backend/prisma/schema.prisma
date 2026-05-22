@@ -13,6 +13,8 @@ model Usuario {
   email    String   @unique
   password String
   rol      Rol      @default(CONSULTOR)
+  area     String?
+  solicitudes  Solicitud[]
   activo   Boolean  @default(true)
   creadoEn DateTime @default(now())
 }
@@ -43,6 +45,7 @@ model Activo {
   fechaCompra    DateTime?
   valor          Float?
   estado         EstadoActivo    @default(SIN_ASIGNAR)
+  fechaBaja      DateTime?
   categoriaId    Int
   categoria      Categoria       @relation(fields: [categoriaId], references: [id])
   asignaciones   Asignacion[]
@@ -92,4 +95,29 @@ enum TipoMantenimiento {
 enum EstadoMant {
   EN_PROCESO
   FINALIZADO
+}
+
+model Solicitud {
+  id          Int              @id @default(autoincrement())
+  tipo        TipoSolicitud
+  estado      EstadoSolicitud  @default(PENDIENTE)
+  usuarioId   Int
+  usuario     Usuario          @relation(fields: [usuarioId], references: [id])
+  comentario  String?
+  datos       Json
+  creadoEn    DateTime         @default(now())
+  revisadoEn  DateTime?
+  revisadoPor Int?
+}
+
+enum TipoSolicitud {
+  ACTIVO
+  ASIGNACION
+  MANTENIMIENTO
+}
+
+enum EstadoSolicitud {
+  PENDIENTE
+  APROBADO
+  RECHAZADO
 }

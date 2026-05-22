@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 import '../styles/Activos.css'
 import { IconEdit, IconTrash } from '@tabler/icons-react'
+import { useNavigate } from 'react-router-dom'
 
 const estadoBadge = {
   ACTIVO: { label: 'Activo', clase: 'badge-activo' },
@@ -18,6 +19,7 @@ const formInicial = {
 
 export default function Activos() {
   const { esAdmin } = useAuth()
+  const navigate = useNavigate()
   const [activos, setActivos] = useState([])
   const [categorias, setCategorias] = useState([])
   const [form, setForm] = useState(formInicial)
@@ -70,6 +72,9 @@ export default function Activos() {
       }
       setForm(formInicial)
       setEditandoId(null)
+      if (form.estado === 'SIN_ASIGNAR' && editandoId) {
+        navigate('/asignaciones')
+      }
       cargarActivos()
     } catch {
       alert('Error al guardar el activo')
@@ -178,17 +183,42 @@ export default function Activos() {
                   value={form.valor}
                   onChange={handleChange}
                   placeholder="Ingrese valor..."
+                  min="0"
                 />
               </div>
               <div className="form-field">
                 <label>Estado</label>
-                <select name="estado" value={form.estado} onChange={handleChange}>
-                  <option value="SIN_ASIGNAR">Sin Asignar</option>
-                  <option value="ACTIVO">Activo</option>
-                  <option value="EN_MANTENIMIENTO">En Mantenimiento</option>
-                  <option value="DADO_DE_BAJA">Dado de Baja</option>
-                </select>
+                {editandoId && (form.estado === 'ACTIVO' || form.estado === 'EN_MANTENIMIENTO' || form.estado === 'DADO_DE_BAJA' || form.estado === 'SIN_ASIGNAR') ? (
+                  <div className="estado-actions">
+                    <div className="estado-readonly">
+                      {form.estado === 'ACTIVO' ? 'Activo'
+                        : form.estado === 'EN_MANTENIMIENTO' ? 'En Mantenimiento'
+                        : form.estado === 'SIN_ASIGNAR' ? 'Sin Asignar'
+                        : 'Dado de Baja'}
+                    </div>
+                    {(form.estado === 'ACTIVO' || form.estado === 'SIN_ASIGNAR') && (
+                      <button
+                        type="button"
+                        className="btn-gestionar"
+                        onClick={() => {
+                          const activoActual = activos.find(a => a.id === editandoId)
+                          navigate('/asignaciones', {
+                            state: { activoPreseleccionado: activoActual }
+                          })
+                        }}
+                      >
+                        Gestionar Asignación
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <select name="estado" value={form.estado} onChange={handleChange}>
+                    <option value="SIN_ASIGNAR">Sin Asignar</option>
+                    <option value="DADO_DE_BAJA">Dado de Baja</option>
+                  </select>
+                )}
               </div>
+
             </div>
             <div className="form-actions">
               <button type="submit" className="btn-primary" disabled={loading}>

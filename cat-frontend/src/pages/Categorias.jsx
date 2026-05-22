@@ -86,7 +86,13 @@ export default function Categorias() {
   }
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    if (name === 'codigoInterno') {
+      const soloLetras = value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, '')
+      setForm({ ...form, [name]: soloLetras })
+    } else {
+      setForm({ ...form, [name]: value })
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -232,7 +238,8 @@ export default function Categorias() {
                     name="codigoInterno"
                     value={form.codigoInterno}
                     onChange={handleChange}
-                    placeholder="Ej. CAT-001"
+                    maxLength={3} 
+                    placeholder="Ej. CAT"
                   />
                 </div>
                 <div className="modal-field">

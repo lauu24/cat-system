@@ -22,7 +22,13 @@ const obtenerActivos = async (req, res) => {
     const [activos, total] = await Promise.all([
       prisma.activo.findMany({
         where,
-        include: { categoria: true },
+        include: { 
+          categoria: true,
+          asignaciones: {
+            where: { activa: true },
+            select: { area: true, activa: true, nombrePersona: true }
+          }
+        },
         skip: (page - 1) * limit,
         take: parseInt(limit),
         orderBy: { creadoEn: 'desc' },
@@ -48,8 +54,23 @@ const crearActivo = async (req, res) => {
 
   try {
     // Generar código automático
-    const count = await prisma.activo.count();
-    const codigo = `ACT-${String(count + 1).padStart(3, '0')}`;
+    const categoria = await prisma.categoria.findUnique({ where: { id: parseInt(categoriaId) } });
+    const prefijo = categoria?.codigoInterno?.substring(0, 3).toUpperCase() || 'ACT';
+
+    const activos = await prisma.activo.findMany({
+      where: { codigo: { startsWith: `${prefijo}-` } },
+      select: { codigo: true }
+    });
+
+    //  Extraer números existentes en un Set para búsqueda instantánea
+    const ocupados = new Set(activos.map(a => parseInt(a.codigo.split('-')[1], 10)));
+
+    //  Encontrar el primer número que NO esté en el Set (reutiliza o sigue la secuencia)
+    let numero = 1;
+    while (ocupados.has(numero)) numero++;
+
+    //  Generar código con el número encontrado
+    const codigo = `${prefijo}-${String(numero).padStart(3, '0')}`;
 
     const activo = await prisma.activo.create({
       data: {
@@ -62,7 +83,13 @@ const crearActivo = async (req, res) => {
         valor: valor ? parseFloat(valor) : null,
         estado: estado || 'SIN_ASIGNAR',
       },
-      include: { categoria: true },
+      include: { 
+        categoria: true,
+        asignaciones: {
+          where: { activa: true },
+          select: { area: true, activa: true }
+        }
+      },
     });
 
     res.status(201).json(activo);
@@ -73,28 +100,46 @@ const crearActivo = async (req, res) => {
 
 // Actualizar un activo
 const actualizarActivo = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
   const { nombre, categoriaId, marcaModelo, numeroSerie,
-          fechaCompra, valor, estado } = req.body;
+          fechaCompra, valor, estado } = req.body
 
   try {
+    const data = {
+      nombre,
+      categoriaId: parseInt(categoriaId),
+      marcaModelo,
+      numeroSerie,
+      fechaCompra: fechaCompra ? new Date(fechaCompra) : null,
+      valor: valor ? parseFloat(valor) : null,
+      estado,
+    }
+
+    // Si se marca como dado de baja, registrar la fecha
+    if (estado === 'DADO_DE_BAJA') {
+      data.fechaBaja = new Date()
+    } else {
+      // Si se reactiva, limpiar la fecha de baja
+      data.fechaBaja = null
+    }
+
     const activo = await prisma.activo.update({
       where: { id: parseInt(id) },
-      data: {
-        nombre,
-        categoriaId: parseInt(categoriaId),
-        marcaModelo,
-        numeroSerie,
-        fechaCompra: fechaCompra ? new Date(fechaCompra) : null,
-        valor: valor ? parseFloat(valor) : null,
-        estado,
-      },
+      data,
       include: { categoria: true },
     });
 
-    res.json(activo);
+    // Si se cambia a SIN_ASIGNAR, desactivar asignación activa
+    if (estado === 'SIN_ASIGNAR') {
+      await prisma.asignacion.updateMany({
+        where: { activoId: parseInt(id), activa: true },
+        data: { activa: false, fechaDevolucion: new Date() },
+      })
+    }
+
+    res.json(activo)
   } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar activo' });
+    res.status(500).json({ error: 'Error al actualizar activo' })
   }
 };
 
