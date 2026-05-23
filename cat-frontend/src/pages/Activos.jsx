@@ -72,9 +72,6 @@ export default function Activos() {
       }
       setForm(formInicial)
       setEditandoId(null)
-      if (form.estado === 'SIN_ASIGNAR' && editandoId) {
-        navigate('/asignaciones')
-      }
       cargarActivos()
     } catch {
       alert('Error al guardar el activo')
