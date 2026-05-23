@@ -185,15 +185,12 @@ export default function Activos() {
               </div>
               <div className="form-field">
                 <label>Estado</label>
-                {editandoId && (form.estado === 'ACTIVO' || form.estado === 'EN_MANTENIMIENTO' || form.estado === 'DADO_DE_BAJA' || form.estado === 'SIN_ASIGNAR') ? (
+                {editandoId && (form.estado === 'ACTIVO' || form.estado === 'EN_MANTENIMIENTO') ? (
                   <div className="estado-actions">
                     <div className="estado-readonly">
-                      {form.estado === 'ACTIVO' ? 'Activo'
-                        : form.estado === 'EN_MANTENIMIENTO' ? 'En Mantenimiento'
-                        : form.estado === 'SIN_ASIGNAR' ? 'Sin Asignar'
-                        : 'Dado de Baja'}
+                      {form.estado === 'ACTIVO' ? 'Activo' : 'En Mantenimiento'}
                     </div>
-                    {(form.estado === 'ACTIVO' || form.estado === 'SIN_ASIGNAR') && (
+                    {form.estado === 'ACTIVO' && (
                       <button
                         type="button"
                         className="btn-gestionar"
@@ -209,13 +206,29 @@ export default function Activos() {
                     )}
                   </div>
                 ) : (
-                  <select name="estado" value={form.estado} onChange={handleChange}>
-                    <option value="SIN_ASIGNAR">Sin Asignar</option>
-                    <option value="DADO_DE_BAJA">Dado de Baja</option>
-                  </select>
+                  <div className="estado-actions">
+                    <select name="estado" value={form.estado} onChange={handleChange}>
+                      <option value="SIN_ASIGNAR">Sin Asignar</option>
+                      <option value="DADO_DE_BAJA">Dado de Baja</option>
+                    </select>
+                    {editandoId && form.estado === 'SIN_ASIGNAR' && (
+                      <button
+                        type="button"
+                        className="btn-gestionar"
+                        onClick={() => {
+                          const activoActual = activos.find(a => a.id === editandoId)
+                          navigate('/asignaciones', {
+                            state: { activoPreseleccionado: activoActual }
+                          })
+                        }}
+                      >
+                        Gestionar Asignación
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
-
+              
             </div>
             <div className="form-actions">
               <button type="submit" className="btn-primary" disabled={loading}>

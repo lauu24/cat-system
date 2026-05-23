@@ -143,7 +143,7 @@ export default function Dashboard() {
         <h2 className="dashboard-valor-titulo">Valor del Inventario</h2>
         <div className="dashboard-valor-grid">
           <div className="dashboard-valor-item">
-            <label>Valor Total (Activos Activos)</label>
+            <label>Valor Total</label>
             <span>{formatCOP(datos?.valorInventario?.valorTotal ?? 0)}</span>
           </div>
           <div className="dashboard-valor-item">
