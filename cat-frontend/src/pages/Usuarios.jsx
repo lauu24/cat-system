@@ -172,7 +172,6 @@ export default function Usuarios() {
               <th>Email</th>
               <th>Área</th>
               <th>Rol</th>
-              <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -200,14 +199,10 @@ export default function Usuarios() {
                     </div>
                   </td>
                   <td>{u.email}</td>
+                  <td>{u.area || '—'}</td>
                   <td>
                     <span className={`badge ${u.rol === 'ADMINISTRADOR' ? 'badge-admin' : 'badge-consultor'}`}>
                       {u.rol === 'ADMINISTRADOR' ? 'Administrador' : 'Lector'}
-                    </span>
-                  </td>
-                  <td>
-                    <span className={`badge ${u.activo ? 'badge-activo-usuario' : 'badge-inactivo-usuario'}`}>
-                      {u.activo ? 'Activo' : 'Inactivo'}
                     </span>
                   </td>
                   <td>
@@ -225,7 +220,6 @@ export default function Usuarios() {
                       </button>
                     </div>
                   </td>
-                  <td>{u.area || '—'}</td>
                 </tr>
               ))
             )}
