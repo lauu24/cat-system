@@ -26,7 +26,9 @@ const obtenerDashboard = async (req, res) => {
         orderBy: { creadoEn: 'desc' },
       }),
       prisma.activo.aggregate({
-        where: { estado: 'ACTIVO' },
+        where: { 
+            notIn: ['DADO_DE_BAJA']
+        },
         _sum: { valor: true },
       }),
       prisma.mantenimiento.aggregate({
