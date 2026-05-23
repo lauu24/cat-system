@@ -27,7 +27,7 @@ const obtenerDashboard = async (req, res) => {
       }),
       prisma.activo.aggregate({
         where: { 
-            notIn: ['DADO_DE_BAJA']
+            NOT: { estado: 'DADO_DE_BAJA' }
         },
         _sum: { valor: true },
       }),
